@@ -15,6 +15,7 @@ async function run() {
 
         console.log(`Will check if ${username} belongs to ${team}`)
         
+        // TODO : probably needs to have proper error handling here
         let data = api.rest.teams.getMembershipForUserInOrg({
               org: organization,
               team_slug: team,
