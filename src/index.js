@@ -15,14 +15,17 @@ async function run() {
 
         console.log(`Will check if ${username} belongs to ${team}`)
         
-        // TODO : probably needs to have proper error handling here
-        let data = api.rest.teams.getMembershipForUserInOrg({
-              org: organization,
-              team_slug: team,
-              username: username,
-            });
+        try {
+            let data = api.rest.teams.getMembershipForUserInOrg({
+                  org: organization,
+                  team_slug: team,
+                  username: username,
+                });
         
-        let isTeamMember = data.role && data.state === 'active';
+            let isTeamMember = data.role && data.state === 'active';
+        } catch (membershipError) {
+            let isTeamMember = false
+        }
 
         core.setOutput("isTeamMember", isTeamMember)
 
